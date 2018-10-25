@@ -1,0 +1,17 @@
+{
+    "name": "rovast\/weather",
+    "description": "A weather SDK based on Amap",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "rovast",
+            "email": "rovast@163.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Rovast\\Weather\\": "src"
+        }
+    }
+}
