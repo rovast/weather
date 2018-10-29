@@ -2,12 +2,31 @@
 
 namespace Rovast\Weather\Tests;
 
+use GuzzleHttp\ClientInterface;
 use Rovast\Weather\Exceptions\InvalidArgumentException;
 use Rovast\Weather\Weather;
 use PHPUnit\Framework\TestCase;
 
 class WeatherTest extends TestCase
 {
+    public function testGetHttpClient()
+    {
+        $w = new Weather('mock-key');
+
+        $this->assertInstanceOf(ClientInterface::class, $w->getHttpClient());
+    }
+
+    public function testSetGuzzleOptions()
+    {
+        $w = new Weather('mock-key');
+
+        $this->assertNull($w->getHttpClient()->getConfig('timeout'));
+
+        $w->setGuzzleOptions(['timeout' => 5000]);
+
+        $this->assertSame(5000, $w->getHttpClient()->getConfig('timeout'));
+    }
+    
     public function testGetWeatherWithInvalidType()
     {
         $w = new Weather('mock-key');

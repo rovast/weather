@@ -15,7 +15,7 @@ use Rovast\Weather\Exceptions\InvalidArgumentException;
 class Weather
 {
     protected $key;
-    protected $guzzleOptions;
+    protected $guzzleOptions = [];
 
     public function __construct(string $key)
     {
