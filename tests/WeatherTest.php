@@ -2,7 +2,10 @@
 
 namespace Rovast\Weather\Tests;
 
+use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use Mockery\Matcher\AnyArgs;
+use Rovast\Weather\Exceptions\HttpException;
 use Rovast\Weather\Exceptions\InvalidArgumentException;
 use Rovast\Weather\Weather;
 use PHPUnit\Framework\TestCase;
@@ -55,5 +58,21 @@ class WeatherTest extends TestCase
 
         // 如果没有抛出异常，就会运行到这行，标记当前测试没成功
         $this->fail('Failed to assert getWeather throw exception with invalid argument');
+    }
+
+    public function testGetWeatherWithGuzzleRuntimeException()
+    {
+        $client = \Mockery::mock(Client::class);
+        $client->allows()
+            ->get(new AnyArgs())
+            ->andThrow(new \Exception('request timeout'));
+
+        $w = \Mockery::mock(Weather::class, ['mock-key'])->makePartial();
+        $w->allows()->getHttpClient()->andReturn($client);
+
+        $this->expectException(HttpException::class);
+        $this->expectExceptionMessage('request timeout');
+
+        $w->getWeather('city');
     }
 }
