@@ -4,6 +4,7 @@ namespace Rovast\Weather\Tests;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Psr7\Response;
 use Mockery\Matcher\AnyArgs;
 use Rovast\Weather\Exceptions\HttpException;
 use Rovast\Weather\Exceptions\InvalidArgumentException;
@@ -29,7 +30,7 @@ class WeatherTest extends TestCase
 
         $this->assertSame(5000, $w->getHttpClient()->getConfig('timeout'));
     }
-    
+
     public function testGetWeatherWithInvalidType()
     {
         $w = new Weather('mock-key');
@@ -74,5 +75,25 @@ class WeatherTest extends TestCase
         $this->expectExceptionMessage('request timeout');
 
         $w->getWeather('city');
+    }
+
+    public function testGetWeather()
+    {
+        // json test
+        $response = new Response(200, [], '{"success": true}');
+        $client   = \Mockery::mock(Client::class);
+        $client->allows()->get('https://restapi.amap.com/v3/weather/weatherInfo?parameters', [
+            'query' => [
+                'key'        => 'mock-key',
+                'city'       => 'city',
+                'extensions' => 'base',
+                'output'     => 'json',
+            ],
+        ])->andReturn($response);
+
+        $w = \Mockery::mock(Weather::class, ['mock-key'])->makePartial();
+        $w->allows()->getHttpClient()->andReturn($client);
+
+        $this->assertSame(["success" => true], $w->getWeather('city'));
     }
 }
