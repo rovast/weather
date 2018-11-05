@@ -90,7 +90,7 @@ class WeatherTest extends TestCase
     {
         // json test
         $response = new Response(200, [], '{"success": true}');
-        $client = \Mockery::mock(Client::class);
+        $client   = \Mockery::mock(Client::class);
         $client->allows()->get('https://restapi.amap.com/v3/weather/weatherInfo?parameters', [
             'query' => [
                 'key' => 'mock-key',
