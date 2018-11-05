@@ -1,5 +1,7 @@
 # Weather
 
+[![Build Status](https://travis-ci.org/rovast/weather.svg?branch=master)](https://travis-ci.org/rovast/weather)
+
 基于[高德开放平台](https://lbs.amap.com/api/webservice/guide/api/weatherinfo/)的天气 API 集成
 
 > 此项目为测试项目，来自 [Laravel-China](https://laravel-china.org) 的 [《PHP 扩展包实战教程 - 从入门到发布》](https://laravel-china.org/courses/creating-package)
