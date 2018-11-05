@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * his file is part of the rovast/weather.
+ *
+ * (c) rovast <rovast@163com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Rovast\Weather;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
@@ -8,7 +17,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
     public function register()
     {
-        $this->app->singleton(Weather::class, function(){
+        $this->app->singleton(Weather::class, function () {
             return new Weather(config('services.weather.key'));
         });
 
