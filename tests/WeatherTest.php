@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * his file is part of the rovast/weather.
+ *
+ * (c) rovast <rovast@163com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Rovast\Weather\Tests;
 
 use GuzzleHttp\Client;
@@ -81,19 +90,19 @@ class WeatherTest extends TestCase
     {
         // json test
         $response = new Response(200, [], '{"success": true}');
-        $client   = \Mockery::mock(Client::class);
+        $client = \Mockery::mock(Client::class);
         $client->allows()->get('https://restapi.amap.com/v3/weather/weatherInfo?parameters', [
             'query' => [
-                'key'        => 'mock-key',
-                'city'       => 'city',
+                'key' => 'mock-key',
+                'city' => 'city',
                 'extensions' => 'base',
-                'output'     => 'json',
+                'output' => 'json',
             ],
         ])->andReturn($response);
 
         $w = \Mockery::mock(Weather::class, ['mock-key'])->makePartial();
         $w->allows()->getHttpClient()->andReturn($client);
 
-        $this->assertSame(["success" => true], $w->getWeather('city'));
+        $this->assertSame(['success' => true], $w->getWeather('city'));
     }
 }
