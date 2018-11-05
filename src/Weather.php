@@ -17,21 +17,21 @@ class Weather
     protected $key;
     protected $guzzleOptions = [];
 
-    public function __construct(string $key)
+    public function __construct($key)
     {
         $this->key = $key;
     }
 
     /**
      * @param        $city
-     * @param string $type
-     * @param string $format
+     * @param        $type
+     * @param        $format
      * @return mixed|string
      * @throws \Rovast\Weather\Exceptions\HttpException
      * @throws \Rovast\Weather\Exceptions\InvalidArgumentException
      * @author ROVAST
      */
-    public function getWeather($city, string $type = 'base', string $format = 'json')
+    public function getWeather($city, $type = 'base', $format = 'json')
     {
         $url = 'https://restapi.amap.com/v3/weather/weatherInfo?parameters';
 
