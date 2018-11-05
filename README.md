@@ -1,6 +1,7 @@
 # Weather
 
 [![Build Status](https://travis-ci.org/rovast/weather.svg?branch=master)](https://travis-ci.org/rovast/weather)
+![StyleCI build status](https://github.styleci.io/repos/154648453/shield) 
 
 基于[高德开放平台](https://lbs.amap.com/api/webservice/guide/api/weatherinfo/)的天气 API 集成
 
