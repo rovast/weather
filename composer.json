@@ -14,6 +14,11 @@
         "mockery/mockery": "^1.2",
         "phpunit/phpunit": "~5"
     },
+    "scripts": {
+        "phpcpd": "vendor/bin/phpcpd ./src",
+        "php-cs-fixer": "vendor/bin/php-cs-fixer fix ./src",
+        "phpmd": "vendor/bin/phpmd ./src  text ./phpmd.xml"
+    },
     "autoload": {
         "psr-4": {
             "Rovast\\Weather\\": "./src"
